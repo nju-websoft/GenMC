@@ -1,0 +1,6 @@
+apex==0.9.10dev
+numpy==1.20.2
+rouge==1.0.0
+torch==1.7.1
+tqdm==4.51.0
+transformers==4.12.5
