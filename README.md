@@ -1,6 +1,6 @@
 # GenMC
 
-Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ](https://arxiv.org/) (NAACL 2022)
+Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ] (NAACL 2022)
 ![model](model.png)
 
 ## Installation
