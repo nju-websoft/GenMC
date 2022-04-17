@@ -3,6 +3,8 @@
 Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ] (NAACL 2022)
 ![model](model.png)
 
+We propose a generation-enhanced multiple-choice QA model named GenMC. It generates a clue from the question and then leverages the clue to enhance a reader for multiple-choice QA.
+
 ## Installation
 ```angular2html
 pip install -r requirements.txt
