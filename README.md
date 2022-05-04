@@ -1,6 +1,6 @@
 # GenMC
 
-Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ] (NAACL 2022)
+Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ](https://arxiv.org/pdf/2205.00274.pdf) (NAACL 2022)
 ![model](model.png)
 
 We propose a generation-enhanced multiple-choice QA model named GenMC. It generates a clue from the question and then leverages the clue to enhance a reader for multiple-choice QA.
