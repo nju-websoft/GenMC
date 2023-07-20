@@ -28,11 +28,19 @@ class GenMC(nn.Module):
         n_gpu = torch.cuda.device_count()
         layer_num = self.t5_model.config.num_layers
         layer_per_gpu = layer_num // n_gpu
+        layer_per_gpu_remainder = layer_num % n_gpu
         device_map = {}
+        cur_layer = 0
         for n in range(n_gpu):
-            device_map[n] = [i + n * layer_per_gpu for i in range(layer_per_gpu)]
-        remain_layer = [i + n_gpu * layer_per_gpu for i in range(layer_num - layer_per_gpu * n_gpu)]
-        device_map[n_gpu - 1] += remain_layer
+            device_map[n] = []
+            if n < layer_per_gpu_remainder:
+                layer_assigned = layer_per_gpu+1
+            else:
+                layer_assigned = layer_per_gpu
+
+            for i in range(layer_assigned):
+                device_map[n].append(cur_layer)
+                cur_layer += 1
         self.t5_model.parallelize(device_map)
 
 
