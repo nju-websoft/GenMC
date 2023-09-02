@@ -118,28 +118,27 @@ def eval(model, test_examples, tokenizer, eval_batch_size, choice_num, max_len, 
 
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path",
-                        default='t5-base',
+                        default='t5_base',
                         required=True,
                         type=str)
     parser.add_argument("--choice_num",
-                        default=5,
+                        default=4,
                         type=int)
     parser.add_argument("--data_path_train",
-                        default='./data/csqa/in_hourse/train.jsonl',
+                        default='./data/arc_easy/in_house/train.jsonl',
                         required=True,
                         type=str)
     parser.add_argument("--data_path_dev",
-                        default='./data/csqa/in_hourse/dev.jsonl',
+                        default='./data/arc_easy/in_house/dev.jsonl',
                         required=True,
                         type=str)
     parser.add_argument("--data_path_test",
-                        default='./data/csqa/in_hourse/test.jsonl',
-                        required=True,
+                        default='./data/arc_easy/in_house/test.jsonl',
                         type=str)
     parser.add_argument("--results_save_path",
                         default='./results/',
@@ -156,7 +155,6 @@ if __name__ == '__main__':
                         type=int,
                         default=4,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
-
     parser.add_argument("--output_dir",
                         default='./outputs/',
                         type=str,
@@ -204,9 +202,7 @@ if __name__ == '__main__':
                         type=int,
                         default=None,
                         help="The number of retrieved sentences")
-
     args = parser.parse_args()
-
     file_name = f'lr_{args.lr}_seed_{args.seed}_bs_{args.train_batch_size}_ga_{args.gradient_accumulation_steps}_layer_num_{args.num_hidden_layers}_alpha_{args.alpha}_beta_{args.beta}'
     output_model_path = './outputs/' + args.name_save_prix + '/' + file_name + "/"
     path_save_result = './results/' + args.name_save_prix + '/' + file_name + "/"
