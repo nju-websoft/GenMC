@@ -24,7 +24,7 @@ python run_genmc.py  \
 
 Example:
 ```
-python run_genmc.py --model_path t5-base --choice_num 5 --data_path_train ./data/csqa/in_hourse/train.jsonl  --data_path_dev ./data/csqa/in_hourse/dev.jsonl  --data_path_test ./data/csqa/in_hourse/test.jsonl 
+python run_genmc.py --model_path t5-base --choice_num 5 --data_path_train ./data/csqa/in_house/train.jsonl  --data_path_dev ./data/csqa/in_house/dev.jsonl  --data_path_test ./data/csqa/in_house/test.jsonl 
 ```
 
 ### Reference
