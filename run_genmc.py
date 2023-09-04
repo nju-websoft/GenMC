@@ -117,34 +117,30 @@ def eval(model, test_examples, tokenizer, eval_batch_size, choice_num, max_len, 
     return count_right / count, rouge_score, results
 
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
+dataset = 'arc_challenge'
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_path",
-                        default='t5_base',
-                        required=True,
+                        default='t5-base',
                         type=str)
     parser.add_argument("--choice_num",
                         default=4,
                         type=int)
     parser.add_argument("--data_path_train",
-                        default='./data/arc_easy/in_house/train.jsonl',
-                        required=True,
+                        default=f'./data/{dataset}/in_house/train.jsonl',
                         type=str)
     parser.add_argument("--data_path_dev",
-                        default='./data/arc_easy/in_house/dev.jsonl',
-                        required=True,
+                        default=f'./data/{dataset}/in_house/dev.jsonl',
                         type=str)
     parser.add_argument("--data_path_test",
-                        default='./data/arc_easy/in_house/test.jsonl',
+                        default=f'./data/{dataset}/in_house/test.jsonl',
                         type=str)
     parser.add_argument("--results_save_path",
                         default='./results/',
                         type=str)
     parser.add_argument("--train_batch_size",
-                        default=64,
+                        default=8,
                         type=int,
                         help="Total batch size for training.")
     parser.add_argument("--eval_batch_size",
@@ -153,7 +149,7 @@ if __name__ == '__main__':
                         help="Total batch size for eval.")
     parser.add_argument('--gradient_accumulation_steps',
                         type=int,
-                        default=4,
+                        default=1,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
     parser.add_argument("--output_dir",
                         default='./outputs/',
@@ -164,17 +160,17 @@ if __name__ == '__main__':
                         type=str,
                         help="Initial checkpoint (usually from a pre-trained BERT model)")
     parser.add_argument("--max_len",
-                        default=64,
+                        default=256,
                         type=int,
                         help="The maximum total input sequence length after WordPiece tokenization. \n"
                              "Sequences longer than this will be truncated, and sequences shorter \n"
                              "than this will be padded.")
     parser.add_argument("--max_len_gen",
-                        default=32,
+                        default=64,
                         type=int,
                         help="The maximum total output sequence length for decoder")
     parser.add_argument("--lr",
-                        default=5e-5,
+                        default=1e-4,
                         type=float,
                         help="The initial learning rate for Adam.")
     parser.add_argument("--epoch_num",
@@ -187,7 +183,7 @@ if __name__ == '__main__':
                         help="The number of hidden layer for co-matching and encoder-decoder interaction transformer")
     parser.add_argument('--alpha',
                         type=float,
-                        default=1)
+                        default=0.5)
     parser.add_argument('--beta',
                         type=float,
                         default=1)
@@ -196,7 +192,10 @@ if __name__ == '__main__':
                         default=1,
                         help="random seed for initialization")
     parser.add_argument("--name_save_prix",
-                        default='GenMC_CSQA',
+                        default=dataset,
+                        type=str)
+    parser.add_argument("--gpu",
+                        default="0",
                         type=str)
     parser.add_argument('--external_sent_num',
                         type=int,
@@ -206,7 +205,8 @@ if __name__ == '__main__':
     file_name = f'lr_{args.lr}_seed_{args.seed}_bs_{args.train_batch_size}_ga_{args.gradient_accumulation_steps}_layer_num_{args.num_hidden_layers}_alpha_{args.alpha}_beta_{args.beta}'
     output_model_path = './outputs/' + args.name_save_prix + '/' + file_name + "/"
     path_save_result = './results/' + args.name_save_prix + '/' + file_name + "/"
-
+    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
     os.makedirs(path_save_result, exist_ok=True)
     set_seed(args.seed)
     train_examples = read_dataset(args.data_path_train)
@@ -297,7 +297,7 @@ if __name__ == '__main__':
             # save_model(output_model_path, model, optimizer)
             print('new best dev acc:', dev_acc, 'test_acc:', test_acc, 'rouge:', dev_rouge_score)
 
-        if early_stop >= 5:
+        if early_stop >= 10:
             break
 
     print('best dev acc:', best_dev_acc, 'best_test_acc:', best_test_acc,

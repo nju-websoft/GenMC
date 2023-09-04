@@ -1,0 +1,3 @@
+python run_genmc.py --model_path t5-base --choice_num 4 --gpu 0 --lr 5e-5 --data_path_train ./data/arc_easy/in_house/train.jsonl --data_path_dev ./data/arc_easy/in_house/dev.jsonl  --data_path_test ./data/arc_easy/in_house/test.jsonl  --train_batch_size 8  --gradient_accumulation_steps 1  --max_len 128  --max_len_gen 32 --alpha 1 --beta 0.5 --seed 1  --name_save_prix arc_easy
+
+python run_genmc.py --model_path t5-large --choice_num 4 --gpu 0 --lr 5e-5  --data_path_train ./data/arc_easy/in_house/train.jsonl --data_path_dev ./data/arc_easy/in_house/dev.jsonl  --data_path_test ./data/arc_easy/in_house/test.jsonl  --train_batch_size 8  --gradient_accumulation_steps 2  --max_len 128  --max_len_gen 32 --alpha 1 --beta 0.5 --seed 1  --name_save_prix arc_easy_large
