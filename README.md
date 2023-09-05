@@ -5,7 +5,9 @@ Code for [Clues Before Answers: Generation-Enhanced Multiple-Choice QA ](https:/
 
 We propose a generation-enhanced multiple-choice QA model named GenMC. It generates a clue from the question and then leverages the clue to enhance a reader for multiple-choice QA.
 
-GenMC is the first model who achieves human performance in commonsense challenge dataset [OpenBookQA](https://leaderboard.allenai.org/open_book_qa/submissions/public). ![leaderboard](leaderboard.png)
+GenMC is the first model who achieves human performance in commonsense challenge dataset [OpenBookQA](https://leaderboard.allenai.org/open_book_qa/submissions/public). 
+
+![leaderboard](leaderboard.png)
 
 ## Installation
 ```angular2html
