@@ -7,7 +7,7 @@ We propose a generation-enhanced multiple-choice QA model named GenMC. It genera
 ![model](model.png)
 
 
-GenMC is the first model who achieves human performance in commonsense challenge dataset [OpenBookQA](https://leaderboard.allenai.org/open_book_qa/submissions/public). 
+GenMC is the first model achieving human performance in the commonsense challenge dataset [OpenBookQA](https://leaderboard.allenai.org/open_book_qa/submissions/public). 
 
 ![leaderboard](leaderboard.png)
 
